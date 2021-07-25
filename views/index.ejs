@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>CHOTA_URL-url shortner</title>
+</head>
+
+<body>
+    <div class="container my-4">
+        <h1>CHOTA URL</h1>
+        <form action="/shortUrl" method="POST" class="my-4 form-inline">
+            <label for="fullurl" class="sr-only">Url</label>
+            <input required placeholder="Url..." class="form-control col mr-2" type="url" name="fullurl" id="fullurl">
+            <button class="btn btn-danger" type="submit">Chota Karo</button>
+        </form>
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>CHOTA URL</th>
+                    <th>Clicks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% shortUrls.forEach(shortUrl=> { %>
+                    <tr>
+                        <td><a target="_blank" href="<%= shortUrl.full %>">
+                                <%= shortUrl.full %>
+                            </a>
+                        </td>
+                        <td><a target="_blank" href="<%= shortUrl.short %>">
+                                <%= shortUrl.short %>
+                            </a>
+                        </td>
+                        <td>
+                            <%= shortUrl.clicks %>
+                        </td>
+                        <td><input class="btn btn-dark btn-sm" onClick="copy(this)" type="button" value="Copy" id=<%=shortUrl.short %> /></td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function copy(e) {
+            var str = "localhost:3000/" + e.id;
+            console.log(str);
+            var dummy = document.createElement("textarea");
+
+            document.body.appendChild(dummy);
+
+            dummy.value = str;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            document.getElementById(e.id).value = "Copied..";
+            setTimeout(() => {
+                document.getElementById(e.id).value = "Copy";
+            }, 2000);
+        }
+    </script>
+
+</body>
+
+</html>
