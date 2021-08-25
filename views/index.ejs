@@ -48,7 +48,8 @@
     </div>
     <script>
         function copy(e) {
-            var str = "localhost:3000/" + e.id;
+
+            var str = (process.env.DB_HOST || "localhost") + ":" + (PORT || 3000) + "/" + e.id;
             console.log(str);
             var dummy = document.createElement("textarea");
 

@@ -5,7 +5,10 @@ const shortUrl = require('./models/shortUrl');
 const  app = express();
 const port = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost/urlShortner',{useNewUrlParser:true , useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://tiger:scotch@cluster0.yrmd4.mongodb.net/urlShortner?retryWrites=true&w=majority',{useNewUrlParser:true , useUnifiedTopology: true}).then(()=>{
+    console.log("connected with mongodb atlas");
+    console.log(process.env.DB_HOST);
+}).catch(err => console.log(err));
 
 app.use(express.urlencoded({extended : "false"}));
 
