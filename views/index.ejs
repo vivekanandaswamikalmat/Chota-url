@@ -10,7 +10,7 @@
     <title>CHOTURL-url shortner</title>
 </head>
 
-<body>
+<body onload="visited()">
     <div class="container my-4">
         <h1>CHOTA URL</h1>
         <form action="/shortUrl" method="POST" class="my-4 form-inline">
@@ -47,7 +47,12 @@
         </table>
     </div>
     <script>
-
+        function visited() {
+            fetch('https://api.countapi.xyz/update/sitevisits/any/?amount=1')
+            .then((res)=>res.json())
+            .then((res)=>
+            console.log("Total number of visits are : " + res.value));
+        }
         function copy(e) {
             var str = "choturl.herokuapp.com/" + e.id;
             console.log(str);
