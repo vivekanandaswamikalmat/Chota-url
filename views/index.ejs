@@ -40,17 +40,18 @@
                         <td>
                             <%= shortUrl.clicks %>
                         </td>
-                        <td><input class="btn btn-dark btn-sm" onClick="copy(this)" type="button" value="Copy" id=<%=shortUrl.short %> /></td>
+                        <td><input class="btn btn-dark btn-sm" onClick=copy(this) type="button" value="Copy" id=<%=shortUrl.short %> /></td>
                     </tr>
                     <% }); %>
             </tbody>
         </table>
     </div>
     <script>
-        function copy(e) {
 
-            var str = (process.env.DB_HOST || "localhost") + ":" + (PORT || 3000) + "/" + e.id;
+        function copy(e) {
+            var str = "choturl.herokuapp.com/" + e.id;
             console.log(str);
+            console.log("onclicked")
             var dummy = document.createElement("textarea");
 
             document.body.appendChild(dummy);
