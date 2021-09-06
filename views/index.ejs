@@ -7,17 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
-    <title>CHOTURL-url shortner</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png">
+
+    <title>CHOTURL- url shortner</title>
 </head>
 
 <body onload="visited()">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary" >
+        <a class="navbar-brand" href="/" style="padding: 0px; color:white">CHOTURL</a>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+            <a class="nav-link" href="/about" style="padding: 0px;color:white">About <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        </div>
+    </nav>
     <div class="container my-4">
-        <h1>CHOTA URL</h1>
+        <h3 >CHOTURL is a free tool to shorten a URL or reduce a link.</h3>
+        Paste the URL to be shortened
         <form action="/shortUrl" method="POST" class="my-4 form-inline">
             <label for="fullurl" class="sr-only">Url</label>
             <input required placeholder="Url..." class="form-control col mr-2" type="url" name="fullurl" id="fullurl">
-            <button class="btn btn-danger" type="submit">Chota Karo</button>
+            <button class="btn btn-primary" type="submit">Chota Karo</button>
         </form>
         <table class="table table-striped table-responsive">
             <thead>
@@ -41,38 +54,47 @@
                         <td>
                             <%= shortUrl.clicks %>
                         </td>
-                        <td><input class="btn btn-dark btn-sm" onClick=copy(this) type="button" value="Copy" id=<%=shortUrl.short %> /></td>
+                        <td><input class="btn btn-dark btn-sm" onClick=copy(this) type="button" value="Copy"
+                                id=<%=shortUrl.short %> /></td>
+                        <td><a href="/delete/<%= shortUrl._id%>" id=<%=shortUrl._id %> 
+                            ><input  class="btn btn-danger btn-sm" type="button" value="Delete"/></a></td>
+
                     </tr>
                     <% }); %>
             </tbody>
         </table>
     </div>
-    <script>
-        function visited() {
-            fetch('https://api.countapi.xyz/update/sitevisits/any/?amount=1')
-            .then((res)=>res.json())
-            .then((res)=>
-            console.log("Total number of visits are : " + res.value));
-        }
-        function copy(e) {
-            var str = "choturl.herokuapp.com/" + e.id;
-            console.log(str);
-            console.log("onclicked")
-            var dummy = document.createElement("textarea");
-
-            document.body.appendChild(dummy);
-
-            dummy.value = str;
-            dummy.select();
-            document.execCommand("copy");
-            document.body.removeChild(dummy);
-            document.getElementById(e.id).value = "Copied..";
-            setTimeout(() => {
-                document.getElementById(e.id).value = "Copy";
-            }, 2000);
-        }
-    </script>
 
 </body>
+
+<script>
+
+
+    function visited() {
+        fetch('https://api.countapi.xyz/update/sitevisits/any/?amount=1')
+            .then((res) => res.json())
+            .then((res) =>
+                console.log("Total number of visits are : " + res.value));
+    }
+
+    function copy(e) {
+        var str = "choturl.herokuapp.com/" + e.id;
+        console.log(str);
+        console.log("onclicked")
+        var dummy = document.createElement("textarea");
+
+        document.body.appendChild(dummy);
+
+
+        dummy.value = str;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+        document.getElementById(e.id).value = "Copied..";
+        setTimeout(() => {
+            document.getElementById(e.id).value = "Copy";
+        }, 2000);
+    }
+</script>
 
 </html>

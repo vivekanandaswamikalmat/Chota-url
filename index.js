@@ -32,6 +32,20 @@ app.get('/:short',async (req,res)=>{
 
 })
 
+app.get('/delete/:id',async (req,res)=>{
+    try{
+        let result = await shortUrl.findByIdAndDelete({_id : req.params.id});
+        console.log("deleted :"+ req.params.id)
+    }
+    catch(err){
+        console.log("error ocuured")
+        console.log(err)
+    }
+    res.redirect("/")
+})
+
 app.listen(port , ()=>{
     console.log(`listening at port ${port} `);
 });
+
+
