@@ -17,8 +17,8 @@ app.set('view engine','ejs');
 
 app.get('/',async(req,res)=>{
     const shortUrls = await shortUrl.find();
-    res.render('index',{ shortUrls : shortUrls });
-//     res.status(200).json(shortUrls);
+//     res.render('index',{ shortUrls : shortUrls });
+    res.status(200).json(shortUrls);
 })
 
 app.post('/shortUrl',async (req,res)=>{
