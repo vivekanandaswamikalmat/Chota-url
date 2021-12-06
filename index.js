@@ -11,11 +11,14 @@ mongoose.connect('mongodb+srv://tiger:scotch@cluster0.yrmd4.mongodb.net/urlShort
 
 app.use(express.urlencoded({extended : "false"}));
 
+app.use(express.json());
+
 app.set('view engine','ejs');
 
 app.get('/',async(req,res)=>{
     const shortUrls = await shortUrl.find();
-    res.render('index',{ shortUrls : shortUrls });
+//     res.render('index',{ shortUrls : shortUrls });
+    res.status(200).json(shortUrls);
 })
 
 app.post('/shortUrl',async (req,res)=>{
